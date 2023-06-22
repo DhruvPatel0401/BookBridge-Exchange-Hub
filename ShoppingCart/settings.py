@@ -18,7 +18,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "mptt",
-    "ShoppingCart.apps.productCatalogue"
+    "ShoppingCart.apps.productCatalogue",
 ]
 
 MIDDLEWARE = [
