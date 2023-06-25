@@ -31,6 +31,9 @@ class Category(MPTTModel):
         verbose_name = _("Category")
         verbose_name_plural = _("Categories")
 
+    def get_absolute_url(self):
+        return reverse("productCatalogue:category_list", args=[self.slug])
+
     def __str__(self):
         return self.name
 
