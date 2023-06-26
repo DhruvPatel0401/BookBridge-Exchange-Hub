@@ -101,7 +101,7 @@
           </div>
           <a type="button" role="button" href=""
             class="btn btn-outline-secondary border-0 basket-btn">
-            {% comment %} {% with total_qty=basket|length %}
+            {% with total_qty=basket|length %}
             <div id="basket-qty" class="basket-qty">
               {% if total_qty > 0 %}
               {{ total_qty }}
@@ -109,7 +109,7 @@
               0
               {% endif %}
             </div>
-            {% endwith %} {% endcomment %}
+            {% endwith %}
             <div>
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-cart3"
                 viewBox="0 0 16 16">
@@ -119,28 +119,6 @@
             </div>
             <span class="fs15 fw500">Basket</span>
           </a>
-        </div>
-        <div class="d-md-none d-lg-none d-xl-none">
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">
-              <li><a class="dropdown-item" href="{% url "productCatalogue:store_home" %}">All</a></li>
-              {% for c in categories %}
-              <li {% if category.slug == c.slug %}class="selected" {% endif %}>
-                <a class="dropdown-item" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
-              </li>
-              {% endfor %}
-            </ul>
-            <h6 class="card-title">My Account</h6>
-              <ul class="list-group list-group-flush dropdown-account-link">
-                {% if user.is_authenticated %}
-                <a href="" class="dropdown-item">Your Account</a>
-                <a href="#" class="dropdown-item">Orders</a>
-                <a href="" class="dropdown-item">Logout</a>      
-                {% else %}
-                <a href="" class="dropdown-item">Login</a>
-                {% endif %}
-              </ul>
-          </div>
         </div>
         <form class="d-flex w-100 d-md-none">
           <input class="form-control me-2" type="search" placeholder="Search products or FAQ" aria-label="Search">

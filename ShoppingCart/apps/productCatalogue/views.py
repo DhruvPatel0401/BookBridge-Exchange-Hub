@@ -12,7 +12,26 @@ class ProductAll(APIView):
             is_active=True
         )
         product_serializer = ProductSerializer(products, many=True)
-        return render(request, "base.html", {"products": product_serializer.data})
+        for product in product_serializer.data:
+            product_images = product['product_image']
+            for image in product_images:
+                print(image)
+        return render(
+            request,
+            "productCatalogue/index.html",
+            {"products": product_serializer.data},
+        )
+
+
+class ProductDetail(APIView):
+    def get(self, request, slug):
+        product = get_object_or_404(Product, slug=slug, is_active=True)
+        product_serializer = ProductSerializer(product)
+        return render(
+            request,
+            "productCatalogue/single.html",
+            {"product": product_serializer.data},
+        )
 
 
 class CategoryList(APIView):
@@ -23,4 +42,8 @@ class CategoryList(APIView):
         )
         category_serializer = CategorySerializer(category)
         product_serializer = ProductSerializer(products, many=True)
-        return render(request, "base.html", {"category": category_serializer.data, "products": product_serializer.data})
+        return render(
+            request,
+            "productCatalogue/category.html",
+            {"category": category_serializer.data, "products": product_serializer.data},
+        )
