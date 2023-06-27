@@ -12,10 +12,6 @@ class ProductAll(APIView):
             is_active=True
         )
         product_serializer = ProductSerializer(products, many=True)
-        for product in product_serializer.data:
-            product_images = product['product_image']
-            for image in product_images:
-                print(image)
         return render(
             request,
             "productCatalogue/index.html",
@@ -26,6 +22,7 @@ class ProductAll(APIView):
 class ProductDetail(APIView):
     def get(self, request, slug):
         product = get_object_or_404(Product, slug=slug, is_active=True)
+        print(product)
         product_serializer = ProductSerializer(product)
         return render(
             request,

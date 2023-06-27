@@ -17,14 +17,14 @@
                 <div class="card border-0">
                   {% for image in product.product_image %}
                   {% if image.is_feature%}
-                  <img class="img-fluid" alt="Responsive image" src="{{ image.image.url }}"
+                  <img class="img-fluid" alt="Responsive image" src="{{ image.image}}"
                     alt="{{ image.image.alt_text }}">
                   {% endif %}
                   {% endfor %}
                   <div class="card-body px-0">
                     <p class="card-text">
                       <a class="text-dark text-decoration-none"
-                        href="{{ product.get_absolute_url }}">{{ product.title|slice:":50" }}...</a>
+                        href="{{ product.absolute_url }}">{{ product.title|slice:":50" }}...</a>
                     </p>
                     <div class="fw-bold">₹{{product.regular_price}}</div>
                   </div>

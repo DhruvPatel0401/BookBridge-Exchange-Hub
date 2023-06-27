@@ -131,6 +131,9 @@ class Product(models.Model):
         settings.AUTH_USER_MODEL, related_name="user_wishlist", blank=True
     )
 
+    def get_absolute_url(self):
+        return reverse("productCatalogue:product_detail", args=[self.slug])
+
     class Meta:
         ordering = ("-created_at",)
         verbose_name = _("Product")
