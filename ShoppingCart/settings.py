@@ -1,5 +1,5 @@
-from pathlib import Path
 import os
+from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -7,7 +7,7 @@ SECRET_KEY = "django-insecure-6p592!tk@f#zc@2f%*dldc*k3zopr46=du=bk8ralq56hovdh+
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["yourdomain.com", "127.0.0.1"]
 
 
 INSTALLED_APPS = [
@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "mptt",
     "ShoppingCart.apps.productCatalogue",
+    "ShoppingCart.apps.basket",
 ]
 
 MIDDLEWARE = [
@@ -46,6 +47,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "ShoppingCart.apps.productCatalogue.context_processors.categories",
+                "ShoppingCart.apps.basket.context_processors.basket",
             ],
         },
     },
@@ -103,11 +105,11 @@ STATIC_URL = "static/"
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
-MEDIA_URL = '/media/'
+MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
+# Basket session ID
+BASKET_SESSION_ID = "basket"
+
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
