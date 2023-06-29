@@ -1,6 +1,9 @@
-from ShoppingCart.apps.productCatalogue.models import Product
 from decimal import Decimal
+
 from django.conf import settings
+
+from ShoppingCart.apps.productCatalogue.models import Product
+
 
 class Basket:
     def __init__(self, request):
@@ -9,5 +12,3 @@ class Basket:
 
     def add(self, product, qty):
         pass
-
-    
