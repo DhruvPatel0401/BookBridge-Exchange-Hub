@@ -99,7 +99,7 @@
               </ul>
             </div>
           </div>
-          <a type="button" role="button" href=""
+          <a type="button" role="button" href="{% url "basket:basket_summary" %}"
             class="btn btn-outline-secondary border-0 basket-btn">
             {% with total_qty=basket|length %}
             <div id="basket-qty" class="basket-qty">
