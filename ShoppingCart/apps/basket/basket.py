@@ -24,6 +24,36 @@ class Basket:
         print(self.basket)
         self.save()
 
+    def delete(self, product):
+        product_id = str(product)
+
+        if product_id in self.basket:
+            del self.basket[product_id]
+            self.save()
+
+    def get_subtotal_price(self):
+        return sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
+
+    def get_delivery_price(self):
+        newprice = 0.00
+
+        if "purchase" in self.session:
+            newprice = DeliveryOptions.objects.get(id=self.session["purchase"]["delivery_id"]).delivery_price
+        return newprice
+
+    def get_total_price(self):
+        newprice = 0.00
+        subtotal = sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
+
+        if "purchase" in self.session:
+            newprice = DeliveryOptions.objects.get(id=self.session["purchase"]["delivery_id"]).delivery_price
+        else:
+            newprice = 50
+            
+        total = subtotal + Decimal(newprice)
+
+        return total
+
     def __len__(self):
         return sum(item["qty"] for item in self.basket.values())
 

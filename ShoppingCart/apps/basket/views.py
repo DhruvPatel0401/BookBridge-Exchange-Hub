@@ -26,3 +26,18 @@ class BaseketAdd(APIView):
             basketqty = basket.__len__()
             data = {"qty": basketqty}
             return Response(data)
+
+class BasketDelete(APIView):
+    def post(self, request):
+        basket = Basket(request)
+        if request.data.get("action") == "post":
+            product_id = int(request.data.get("productid"))
+            basket.delete(product=product_id)
+
+            basketqty = basket.__len__()
+            baskettotal = basket.get_total_price()
+            data = {"subtotal": baskettotal, "qty": basketqty}
+            return Response(data)
+
+class BasketUpdate(APIView):
+    pass
