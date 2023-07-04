@@ -27,6 +27,7 @@ class BaseketAdd(APIView):
             data = {"qty": basketqty}
             return Response(data)
 
+
 class BasketDelete(APIView):
     def post(self, request):
         basket = Basket(request)
@@ -38,6 +39,7 @@ class BasketDelete(APIView):
             baskettotal = basket.get_total_price()
             data = {"subtotal": baskettotal, "qty": basketqty}
             return Response(data)
+
 
 class BasketUpdate(APIView):
     def post(self, request):

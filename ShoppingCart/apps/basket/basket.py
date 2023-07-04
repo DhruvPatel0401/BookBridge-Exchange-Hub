@@ -32,24 +32,32 @@ class Basket:
             self.save()
 
     def get_subtotal_price(self):
-        return sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
+        return sum(
+            Decimal(item["price"]) * item["qty"] for item in self.basket.values()
+        )
 
     def get_delivery_price(self):
         newprice = 0.00
 
         if "purchase" in self.session:
-            newprice = DeliveryOptions.objects.get(id=self.session["purchase"]["delivery_id"]).delivery_price
+            newprice = DeliveryOptions.objects.get(
+                id=self.session["purchase"]["delivery_id"]
+            ).delivery_price
         return newprice
 
     def get_total_price(self):
         newprice = 0.00
-        subtotal = sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
+        subtotal = sum(
+            Decimal(item["price"]) * item["qty"] for item in self.basket.values()
+        )
 
         if "purchase" in self.session:
-            newprice = DeliveryOptions.objects.get(id=self.session["purchase"]["delivery_id"]).delivery_price
+            newprice = DeliveryOptions.objects.get(
+                id=self.session["purchase"]["delivery_id"]
+            ).delivery_price
         else:
             newprice = 50
-            
+
         total = subtotal + Decimal(newprice)
 
         return total
