@@ -43,9 +43,7 @@
               <ul class="dropdown-menu rounded-0 border-0" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="{% url "productCatalogue:store_home" %}">All</a></li>
                 {% for c in categories %}
-                <li {% if category.slug == c.slug %}class="selected" {% endif %}>
                   <a class="dropdown-item" href="{{ c.get_absolute_url }}">{{ c.name|title }}</a>
-                </li>
                 {% endfor %}
               </ul>
             </li>

@@ -22,7 +22,6 @@ class ProductAll(APIView):
 class ProductDetail(APIView):
     def get(self, request, slug):
         product = get_object_or_404(Product, slug=slug, is_active=True)
-        print(product)
         product_serializer = ProductSerializer(product)
         return render(
             request,
