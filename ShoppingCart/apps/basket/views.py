@@ -47,6 +47,7 @@ class BasketUpdate(APIView):
         if request.data.get("action") == "post":
             product_id = int(request.data.get("productid"))
             product_qty = int(request.data.get("productqty"))
+            print(product_qty)
             basket.update(product=product_id, qty=product_qty)
 
             basketqty = basket.__len__()

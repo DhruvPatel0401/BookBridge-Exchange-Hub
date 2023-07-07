@@ -31,6 +31,13 @@ class Basket:
             del self.basket[product_id]
             self.save()
 
+    def update(self, product, qty):
+        product_id = str(product)
+
+        if product_id in self.basket:
+            self.basket[product_id]["qty"] = qty
+        self.save()
+
     def get_subtotal_price(self):
         return sum(
             Decimal(item["price"]) * item["qty"] for item in self.basket.values()
