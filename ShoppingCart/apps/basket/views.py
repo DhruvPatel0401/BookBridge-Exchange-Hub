@@ -11,15 +11,19 @@ from .basket import Basket
 class BasketSummary(APIView):
     def get(self, request):
         basket = Basket(request)
-        chosen_delivery_type = request.session.get('chosen_delivery_type', 'standard')
-        return render(request, "basket/summary.html", {"basket": basket, "chosen_delivery_type": chosen_delivery_type})
+        return render(request, "basket/summary.html", {"basket": basket})
 
 
 class UpdateDeliveryOption(APIView):
     def post(self, request):
-        delivery_option = request.POST.get('delivery_option', 'standard')
-        request.session['chosen_delivery_type'] = delivery_option
-        return Response({'status': 'success'})
+        basket = Basket(request)
+        if request.data.get("action") == "post":
+            session = request.session
+            delivery_option = request.data.get("deliveryOption")
+            delivery_price = 50 if delivery_option == "standard-delivery" else 150
+            if "purchase" not in session:
+                session["purchase"] = {"delivery_price": delivery_price}
+        return Response({'delivery_option': delivery_option, "delivery_price": delivery_price})
 
 
 class BaseketAdd(APIView):
