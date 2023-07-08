@@ -21,7 +21,7 @@
       <div class="d-flex d-flex-inline">
         <div class="pe-3">Order</div>
         <div class="dropdown">
-          <a class="text-reset text-decoration-none dropdown-toggle" href="#" role="link" id="dropdownLink"
+          <a class="text-reset text-decoration-none dropdown-toggle" href="#" role="button" id="dropdownLink"
             data-bs-toggle="dropdown" aria-expanded="false">
             Shipping options
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
@@ -31,18 +31,27 @@
             </svg>
           </a>
           <ul class="dropdown-menu" aria-labelledby="dropdownLink">
-            <li class="item small">Standard delivery</li>
-            <li class="item small">Next day delivery</li>
-          </ul>
-        </div>
+            <li><a class="dropdown-item" href="#" id="standard-delivery">Standard delivery</a></li>
+            <li><a class="dropdown-item" href="#" id="next-day-delivery">Next day delivery</a></li>
+          </ul>          
+        </div>       
       </div>
       <div class="text-end">
         <div class="">Sub Total: <span class="fw-bold">₹</span>
           <div id="subtotal" class="d-inline-flex fw-bold">{{basket.get_subtotal_price}}</div>
         </div>
-        <div id="">Shipping <span class="small">(Standard delivery)</span>: <span class="fw-bold">₹50</span></div>
+        <div id="shipping-line">
+          {% if chosen_delivery_type == 'standard' %}
+            Shipping <span class="small">(Standard delivery)</span>: <span class="fw-bold">₹50</span>
+          {% elif chosen_delivery_type == 'next-day' %}
+            Shipping <span class="small">(Next day delivery)</span>: <span class="fw-bold">₹100</span>
+          {% else %}
+            Shipping: Free
+          {% endif %}
+        </div>
         <div class="pt-2">Total to pay: <span class="fw-bold h5">₹</span>
-          <span id="total" class="fw-bold h5">{{basket.get_total_price}}</span></div>
+          <span id="total" class="fw-bold h5">{{basket.get_total_price}}</span>
+        </div>
       </div>
     </div>
     <div class="col-md-5 col-lg-4 order-md-last p-0 order-3">
@@ -92,6 +101,38 @@
 </div>
 
 <script>
+  var standardDeliveryOption = document.getElementById('standard-delivery');
+  var nextDayDeliveryOption = document.getElementById('next-day-delivery');
+
+  standardDeliveryOption.addEventListener('click', function(e) {
+    e.preventDefault();
+    updateShippingLine('standard');
+    updateDeliveryOption('standard');
+  });
+
+  nextDayDeliveryOption.addEventListener('click', function(e) {
+    e.preventDefault();
+    updateShippingLine('next-day');
+    updateDeliveryOption('next-day');
+  });
+
+  function updateDeliveryOption(option) {
+    $.ajax({
+      type: "POST",
+      url: '{% url "basket:update_delivery_option" %}',
+      data: {
+        delivery_option: option,
+        csrfmiddlewaretoken: "{{ csrf_token }}",
+      },
+      success: function(response) {
+        // Optional: You can handle the success response here if needed
+      },
+      error: function(xhr, errmsg, err) {
+        // Optional: You can handle the error response here if needed
+      }
+    });
+  }
+
   // Delete Item
   $(document).on("click", ".delete-button", function (e) {
     e.preventDefault();
