@@ -61,7 +61,14 @@ class Basket:
         pass
 
     def get_total_price(self):
-        pass
+        newprice = 0.00
+        subtotal = sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
+
+        if "purchase" in self.session:
+            newprice = self.session["purchase"]["delivery_price"]
+        total = subtotal + Decimal(newprice)
+
+        return total
 
     def save(self):
         self.session.modified = True

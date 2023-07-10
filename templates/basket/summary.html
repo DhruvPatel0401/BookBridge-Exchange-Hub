@@ -106,6 +106,7 @@
           success: function(json){
             document.getElementById("delivery-option").innerHTML = "(" + json.delivery_option + ")"
             document.getElementById("delivery-option-price").innerHTML = "₹" + json.delivery_price
+            document.getElementById("total").innerHTML = json.total
           },
           error: function (xhr, errmsg, err) {},
         }); 
