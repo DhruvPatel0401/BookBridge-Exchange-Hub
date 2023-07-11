@@ -26,7 +26,13 @@ class UpdateDeliveryOption(APIView):
             else:
                 session["purchase"]["delivery_price"] = delivery_price
             total = basket.get_total_price()
-        return Response({'delivery_option': delivery_option, "delivery_price": delivery_price, "total": total})
+        return Response(
+            {
+                "delivery_option": delivery_option,
+                "delivery_price": delivery_price,
+                "total": total,
+            }
+        )
 
 
 class BaseketAdd(APIView):

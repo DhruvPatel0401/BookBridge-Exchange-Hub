@@ -20,9 +20,9 @@ class Basket:
             self.basket[product_id]["qty"] = qty
         else:
             self.basket[product_id] = {"price": str(product.regular_price), "qty": qty}
-            
+
         self.save()
-    
+
     def __len__(self):
         return sum(item["qty"] for item in self.basket.values())
 
@@ -62,7 +62,9 @@ class Basket:
 
     def get_total_price(self):
         newprice = 0.00
-        subtotal = sum(Decimal(item["price"]) * item["qty"] for item in self.basket.values())
+        subtotal = sum(
+            Decimal(item["price"]) * item["qty"] for item in self.basket.values()
+        )
         if "purchase" in self.session:
             newprice = self.session["purchase"]["delivery_price"]
         total = subtotal + Decimal(newprice)
