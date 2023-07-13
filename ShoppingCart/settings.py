@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     "mptt",
     "ShoppingCart.apps.productCatalogue",
     "ShoppingCart.apps.basket",
+    "ShoppingCart.apps.checkout",
 ]
 
 MIDDLEWARE = [
