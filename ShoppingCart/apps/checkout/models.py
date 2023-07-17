@@ -23,7 +23,7 @@ class DeliveryOptions(models.Model):
         help_text=_("Maximum 9999.99"),
         error_messages={
             "name": {
-                "max_length":_("The price must be between 0 and 9999.99"),
+                "max_length": _("The price must be between 0 and 9999.99"),
             },
         },
         max_digits=6,
@@ -45,7 +45,9 @@ class DeliveryOptions(models.Model):
         help_text=_("Required"),
         max_length=255,
     )
-    order = models.IntegerField(verbose_name=_("list order"), help_text=_("Required"), default=0)
+    order = models.IntegerField(
+        verbose_name=_("list order"), help_text=_("Required"), default=0
+    )
     is_active = models.BooleanField(default=True)
 
     class Meta:
