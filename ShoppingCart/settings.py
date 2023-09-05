@@ -109,5 +109,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 # Basket session ID
 BASKET_SESSION_ID = "basket"
 
-
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
