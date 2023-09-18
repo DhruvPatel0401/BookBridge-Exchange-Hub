@@ -2,3 +2,14 @@ version: '3.7'
 
 services:
     
+    db:
+      restart: always
+      image: postgres
+      container_name: ecom-postgres
+      environment:
+        - POSTGRES_USER=demo
+        - POSTGRES_PASS=demo
+        - POSTGRES_DB=demo
+        - POSTGRES_PORT=5432
+      ports:
+        - "5432:5432"
