@@ -13,3 +13,15 @@ services:
         - POSTGRES_PORT=5432
       ports:
         - "5432:5432"
+
+    pgadmin:
+      restart: always
+      image: dpage/pgadmin
+      container_name: ecom-pgadmin
+      depends-on:
+        - db
+      ports:
+        - "5051:80"
+      environment:
+        PGADMIN_DEFAULT_EMAIL: admin@admin.com
+        PGADMIN_DEFAULT_PASSWORD: admin
