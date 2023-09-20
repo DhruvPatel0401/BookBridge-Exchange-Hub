@@ -11,14 +11,15 @@ services:
         - POSTGRES_PASS=demo
         - POSTGRES_DB=demo
         - POSTGRES_PORT=5432
+        - POSTGRES_HOST_AUTH_METHOD="trust"
       ports:
         - "5432:5432"
 
     pgadmin:
       restart: always
-      image: dpage/pgadmin
+      image: dpage/pgadmin4
       container_name: ecom-pgadmin
-      depends-on:
+      depends_on:
         - db
       ports:
         - "5051:80"
