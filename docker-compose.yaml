@@ -11,7 +11,6 @@ services:
         - POSTGRES_PASS=demo
         - POSTGRES_DB=demo
         - POSTGRES_PORT=5432
-        - POSTGRES_HOST_AUTH_METHOD="trust"
       ports:
         - "5432:5432"
 
