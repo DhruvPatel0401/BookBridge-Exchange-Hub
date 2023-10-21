@@ -1,0 +1,19 @@
+EcommerceXpress/
+|-- backend/
+|   |-- ecommerce_project/
+|   |   |-- settings.py
+|   |   |-- urls.py
+|   |   |-- ...
+|   |-- venv/
+|   |-- manage.py
+|   |-- requirements.txt
+|
+|-- frontend/
+|   |-- ...
+|
+|-- docker/
+|   |-- ...
+|
+|-- README.md
+|-- LICENSE
+|-- .gitignore
