@@ -1,6 +1,6 @@
-EcommerceXpress/
+BookBridge-Exchange-Hub/
 |-- backend/
-|   |-- ecommerce_project/
+|   |-- bookstore_project/
 |   |   |-- settings.py
 |   |   |-- urls.py
 |   |   |-- ...
